@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>King Fish Aquarium | Premium Aquascapes & Exotic Marine Life</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Condiment&family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ocean: '#010828',
+            cream: '#EFF4FF',
+            neon: '#00F0FF',
+            neonGreen: '#6FFF00',
+            deepBlue: '#001242'
+          },
+          fontFamily: {
+            anton: ['Anton', 'sans-serif'],
+            condiment: ['Condiment', 'cursive'],
+            mono: ['Fira Code', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #010828;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0, 240, 255, 0.3);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 240, 255, 0.6);
+    }
+
+    /* Liquid Glass CSS Effect */
+    .liquid-glass {
+      background: rgba(255, 255, 255, 0.03);
+      background-blend-mode: luminosity;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: none;
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2), 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .liquid-glass::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1.4px;
+      background: linear-gradient(180deg,
+        rgba(255, 255, 255, 0.5) 0%,
+        rgba(0, 240, 255, 0.3) 20%,
+        rgba(255, 255, 255, 0.05) 40%,
+        rgba(255, 255, 255, 0) 60%,
+        rgba(0, 240, 255, 0.25) 80%,
+        rgba(255, 255, 255, 0.4) 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    /* Pulse Glows */
+    @keyframes neonPulse {
+      0%, 100% { filter: drop-shadow(0 0 12px rgba(0,240,255,0.7)); }
+      50% { filter: drop-shadow(0 0 22px rgba(111,255,0,0.85)); }
+    }
+    .neon-glow {
+      animation: neonPulse 4s infinite ease-in-out;
+    }
+
+    /* Texture Overlay */
+    #texture-overlay {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 50;
+      pointer-events: none;
+      background: radial-gradient(circle, rgba(0,240,255,0.03) 1px, transparent 1px);
+      background-size: 32px 32px;
+      mix-blend-mode: overlay;
+      opacity: 0.6;
+    }
+
+    /* Aquatic Bubbles */
+    .bubble {
+      position: absolute;
+      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.85), rgba(0, 240, 255, 0.25) 60%, rgba(255, 255, 255, 0) 70%);
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.5), 0 0 15px rgba(0, 240, 255, 0.35);
+      pointer-events: none;
+      animation: rise 8s infinite linear;
+      will-change: transform, opacity;
+    }
+    @keyframes rise {
+      0% { transform: translateY(100vh) translateX(0) scale(0.4); opacity: 0; }
+      20% { opacity: 0.85; }
+      50% { transform: translateY(50vh) translateX(25px) scale(0.95); opacity: 0.85; }
+      100% { transform: translateY(-10vh) translateX(-15px) scale(1.2); opacity: 0; }
+    }
+
+    /* Loader Ring Pulse */
+    @keyframes loaderSpin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .loader-ring {
+      animation: loaderSpin 2s linear infinite;
+    }
+  </style>
+</head>
+<body class="bg-ocean text-cream font-mono antialiased selection:bg-neon selection:text-ocean overflow-x-hidden">
+
+  <!-- LIQUID GLASS PAGE LOADING OVERLAY -->
+  <div id="loading-screen" class="fixed inset-0 z-[100] bg-ocean flex flex-col items-center justify-center transition-opacity duration-700">
+    <div class="liquid-glass rounded-[36px] p-10 max-w-md w-[90%] flex flex-col items-center justify-center border border-neon/30 shadow-[0_0_50px_rgba(0,240,255,0.2)] text-center relative">
+      
+      <!-- Glowing Animated Ring -->
+      <div class="relative w-24 h-24 mb-6 flex items-center justify-center">
+        <div class="absolute inset-0 rounded-full border-2 border-transparent border-t-neon border-r-neonGreen loader-ring shadow-[0_0_20px_#00F0FF]"></div>
+        <span class="font-anton text-2xl text-neon neon-glow tracking-widest">KF</span>
+      </div>
+
+      <!-- Brand Branding -->
+      <div class="font-anton text-2xl tracking-wider uppercase text-cream mb-2">
+        <span class="text-neon">KING FISH</span> AQUARIUM
+      </div>
+      <span class="text-[10px] font-mono tracking-widest text-neonGreen px-3 py-1 rounded-full border border-neonGreen/40 bg-neonGreen/10 mb-6">
+        RAJA PET SHOP • KANPUR
+      </span>
+
+      <!-- Dynamic Loading Progress Bar -->
+      <div class="w-full bg-white/10 rounded-full h-1.5 overflow-hidden mb-3">
+        <div id="loader-bar" class="bg-gradient-to-r from-neon to-neonGreen h-full w-0 transition-all duration-300"></div>
+      </div>
+      <div id="loader-text" class="text-[11px] font-mono text-cream/70 uppercase tracking-widest">
+        INITIALIZING AQUATIC REALM... <span id="loader-percent" class="text-neon">0%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fixed Texture Overlay -->
+  <div id="texture-overlay"></div>
+
+  <!-- Animated Underwater Bubbles -->
+  <div id="bubble-container" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
+
+  <!-- Cart Button -->
+  <button onclick="toggleCart()" class="fixed bottom-6 right-6 z-40 liquid-glass rounded-full p-4 hover:scale-110 transition duration-300 flex items-center justify-center border border-neon/40 shadow-2xl group">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-neon group-hover:text-neonGreen transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 11h14l1 12H4L5 11z" />
+    </svg>
+    <span id="cart-count" class="hidden absolute -top-1 -right-1 bg-neonGreen text-ocean font-anton text-xs w-6 h-6 rounded-full items-center justify-center animate-bounce">0</span>
+  </button>
+
+  <!-- Ocean Sound Dynamic Pill -->
+  <button id="sound-btn" onclick="toggleOceanSound()" class="fixed bottom-6 left-6 z-40 liquid-glass rounded-full px-5 py-3.5 hover:scale-105 transition duration-300 flex items-center gap-3 border border-neon/30 text-xs font-mono text-cream shadow-2xl backdrop-blur-md group">
+    <span id="sound-dot" class="w-3 h-3 rounded-full bg-gray-400"></span>
+    <span id="sound-text" class="group-hover:text-neon transition">ENABLE DEEP SOUND 🌊</span>
+  </button>
+
+  <!-- SECTION 1: HERO SECTION -->
+  <section id="hero" class="relative w-full min-h-screen flex flex-col justify-between rounded-b-[36px] overflow-hidden border-b border-neon/20 shadow-2xl">
+    <!-- Background Video -->
+    <video autoPlay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0 opacity-40 mix-blend-screen scale-105 transition-transform duration-1000">
+      <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260331_045634_e1c98c76-1265-4f5c-882a-4276f2080894.mp4" type="video/mp4" />
+    </video>
+    
+    <div class="absolute inset-0 bg-gradient-to-b from-ocean/90 via-ocean/40 to-ocean/95 z-0 pointer-events-none"></div>
+
+    <div class="relative z-10 max-w-[1831px] w-full mx-auto px-6 lg:px-16 pt-6 pb-12 flex flex-col justify-between flex-grow">
+      
+      <!-- Header Bar -->
+      <header class="flex items-center justify-between w-full pt-2">
+        <!-- Branding -->
+        <div class="font-anton text-2xl lg:text-3xl tracking-wider uppercase text-cream flex items-center gap-3">
+          <a href="#hero" class="flex items-center gap-2 hover:opacity-90 transition">
+            <span class="text-neon neon-glow">KING FISH</span>
+            <span class="text-cream">AQUARIUM</span>
+          </a>
+          <span class="text-[10px] font-mono tracking-widest text-neonGreen px-2.5 py-1 rounded-full border border-neonGreen/40 bg-neonGreen/10 hidden sm:inline-block shadow-[0_0_10px_rgba(111,255,0,0.15)]">
+            RAJA PET SHOP
+          </span>
+        </div>
+
+        <!-- Main Nav Links -->
+        <nav class="liquid-glass rounded-[28px] px-8 py-3.5 hidden lg:flex items-center gap-9 border border-white/10 shadow-lg">
+          <a href="#hero" class="font-anton text-sm uppercase tracking-wider text-cream hover:text-neon transition">Homepage</a>
+          <a href="#about" class="font-anton text-sm uppercase tracking-wider text-cream hover:text-neon transition">Our Shop</a>
+          <a href="#collection" class="font-anton text-sm uppercase tracking-wider text-cream hover:text-neon transition">Fish & Pets</a>
+          <a href="#map-location" class="font-anton text-sm uppercase tracking-wider text-cream hover:text-neon transition">Map Location</a>
+          <button onclick="toggleScaperModal()" class="font-anton text-sm uppercase tracking-wider text-neonGreen hover:text-neon transition">Tank Scaper</button>
+          <a href="#contact" class="font-anton text-sm uppercase tracking-wider text-cream hover:text-neon transition">Visit Store</a>
+        </nav>
+
+        <!-- High Impact CTA Button -->
+        <button onclick="toggleScaperModal()" class="liquid-glass px-6 py-3 rounded-full font-anton text-xs uppercase tracking-widest text-neon hover:bg-neon hover:text-ocean transition-all duration-300 border border-neon/40 shadow-[0_0_15px_rgba(0,240,255,0.2)]">
+          Custom Tank Estimate
+        </button>
+      </header>
+
+      <!-- Main Hero Content Body -->
+      <div class="my-auto pt-20 pb-8 relative">
+        <div class="max-w-[960px] lg:ml-12 relative flex flex-col items-start">
+          
+          <!-- Cursive Accent Title -->
+          <span class="font-condiment text-neon text-3xl sm:text-5xl md:text-6xl mb-[-12px] sm:mb-[-18px] ml-2 -rotate-1 mix-blend-exclusion z-20 pointer-events-none drop-shadow-[0_0_20px_rgba(0,240,255,0.85)] whitespace-nowrap">
+            Premium Aquarium & Pet Hub
+          </span>
+
+          <!-- Anton Headline -->
+          <h1 class="font-anton text-5xl sm:text-7xl md:text-8xl lg:text-[98px] uppercase leading-[0.96] tracking-tight text-cream">
+            CRAFTING LIVING <br />
+            AQUASCAPES & EXOTIC <br />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-neon via-cream to-neonGreen drop-shadow-[0_0_30px_rgba(0,240,255,0.3)]">HAVEN.</span>
+          </h1>
+
+          <!-- Description -->
+          <p class="mt-7 font-mono text-sm sm:text-base text-cream/80 max-w-xl leading-relaxed bg-black/20 p-4 rounded-2xl border border-white/5 backdrop-blur-sm">
+            Custom rimless aquascapes, rare exotic marine specimens, and complete premium pet nutrition engineered for modern residences in Lal Bangla, Kanpur.
+          </p>
+
+          <!-- CTAs -->
+          <div class="mt-8 flex flex-wrap items-center gap-5">
+            <a href="#collection" class="px-8 py-4 bg-neon text-ocean font-anton text-sm uppercase tracking-widest rounded-full hover:bg-neonGreen transition duration-300 shadow-[0_0_30px_rgba(0,240,255,0.45)] flex items-center gap-2">
+              Explore Species
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+            <button onclick="toggleScaperModal()" class="liquid-glass px-8 py-4 text-cream font-anton text-sm uppercase tracking-widest rounded-full hover:bg-white/10 transition border border-white/20">
+              Design Your Tank
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Side Buttons -->
+        <div class="hidden lg:flex flex-col gap-4 absolute top-4 right-0 z-30">
+          <div class="relative group">
+            <a href="tel:+918853501676" class="w-14 h-14 liquid-glass rounded-2xl flex items-center justify-center text-cream hover:text-neon hover:bg-white/10 transition duration-300 border border-white/10 shadow-lg">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            </a>
+            <span class="absolute right-16 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-ocean/90 border border-white/20 text-cream text-[11px] font-mono px-3 py-1.5 rounded-lg whitespace-nowrap pointer-events-none shadow-xl">
+              Call Shop (088535 01676)
+            </span>
+          </div>
+
+          <div class="relative group">
+            <a href="#map-location" class="w-14 h-14 liquid-glass rounded-2xl flex items-center justify-center text-cream hover:text-neon hover:bg-white/10 transition duration-300 border border-white/10 shadow-lg">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            </a>
+            <span class="absolute right-16 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-ocean/90 border border-white/20 text-cream text-[11px] font-mono px-3 py-1.5 rounded-lg whitespace-nowrap pointer-events-none shadow-xl">
+              View Map Location
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ticker Bar -->
+      <div class="w-full flex flex-col md:flex-row items-center justify-between border-t border-white/10 pt-5 gap-4 text-xs tracking-wider text-cream/70 font-mono">
+        <div class="flex items-center gap-6">
+          <span class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-neonGreen animate-pulse"></span> LAL BANGLA, KANPUR</span>
+          <span class="hidden sm:inline text-white/30">|</span>
+          <span class="hidden sm:inline">MON-SUN: 10AM - 9PM</span>
+        </div>
+        <div class="text-neon uppercase tracking-widest flex items-center gap-2">
+          <span>SCROLL DOWN TO EXPLORE</span>
+          <svg class="w-3.5 h-3.5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 2: ABOUT SHOP -->
+  <section id="about" class="relative w-full min-h-screen flex flex-col justify-center py-20 px-6 lg:px-16 overflow-hidden">
+    <video autoPlay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0 opacity-20">
+      <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260331_151551_992053d1-3d3e-4b8c-abac-45f22158f411.mp4" type="video/mp4" />
+    </video>
+    <div class="absolute inset-0 bg-ocean/90 z-0"></div>
+
+    <div class="relative z-10 max-w-[1831px] w-full mx-auto flex flex-col justify-between gap-16">
+      
+      <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8">
+        <div class="relative">
+          <h2 class="font-anton text-4xl sm:text-6xl lg:text-7xl uppercase text-cream leading-tight">
+            NAMASTE! <br />
+            KING FISH AQUARIUM
+          </h2>
+          <span class="font-condiment text-neon text-4xl sm:text-6xl absolute -bottom-4 right-0 sm:right-12 -rotate-2 mix-blend-exclusion text-neonGreen">
+            Raja Pet Shop
+          </span>
+        </div>
+
+        <p class="font-mono text-sm sm:text-base text-cream/80 uppercase max-w-md leading-relaxed border-l-2 border-neon pl-6">
+          A living aquatic realm in Kanpur. Located opposite Khalsa Inter College, Lal Bangla. We specialize in rare freshwater specimens, biological filtration setups, and full dog/cat pet supplies.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pt-12">
+        <div class="liquid-glass p-8 rounded-[24px] border border-white/10 hover:border-neon/40 transition">
+          <div class="font-anton text-5xl text-neon mb-2">500+</div>
+          <div class="font-anton text-lg uppercase tracking-wide text-cream mb-2">AQUARIUMS INSTALLED</div>
+          <p class="text-xs text-cream/60">Bespoke custom tanks tailored for homes, offices, and commercial spaces in Kanpur.</p>
+        </div>
+
+        <div class="liquid-glass p-8 rounded-[24px] border border-white/10 hover:border-neon/40 transition">
+          <div class="font-anton text-5xl text-neonGreen mb-2">100+</div>
+          <div class="font-anton text-lg uppercase tracking-wide text-cream mb-2">FISH VARIETIES</div>
+          <p class="text-xs text-cream/60">Discus, Flowerhorns, Monster Fish, Glowing Tetras, and healthy aquatic plants.</p>
+        </div>
+
+        <div class="liquid-glass p-8 rounded-[24px] border border-white/10 hover:border-neon/40 transition">
+          <div class="font-anton text-5xl text-neon mb-2">100%</div>
+          <div class="font-anton text-lg uppercase tracking-wide text-cream mb-2">HEALTHY GUARANTEE</div>
+          <p class="text-xs text-cream/60">Fully quarantined specimens ensuring disease-free and long-living fish.</p>
+        </div>
+
+        <div class="liquid-glass p-8 rounded-[24px] border border-white/10 hover:border-neon/40 transition">
+          <div class="font-anton text-5xl text-neonGreen mb-2">PET</div>
+          <div class="font-anton text-lg uppercase tracking-wide text-cream mb-2">DOG & CAT SUPPLIES</div>
+          <p class="text-xs text-cream/60">Top-rated food, accessories, and health products for your pets.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 3: COLLECTION GRID -->
+  <section id="collection" class="relative w-full py-24 px-6 lg:px-16 bg-ocean">
+    <div class="max-w-[1831px] w-full mx-auto">
+      
+      <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-16 gap-8">
+        <div>
+          <h2 class="font-anton text-4xl sm:text-6xl lg:text-7xl uppercase text-cream leading-none">
+            COLLECTION OF <br />
+            <span class="pl-8 sm:pl-16 flex items-center gap-4">
+              <span class="font-condiment text-neon text-4xl sm:text-6xl font-normal lowercase">aquatic</span> 
+              <span>SPECIES & TANKS</span>
+            </span>
+          </h2>
+        </div>
+
+        <div id="filter-buttons" class="flex flex-wrap items-center gap-3">
+          <!-- Filters Generated dynamically -->
+        </div>
+      </div>
+
+      <div id="grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Collection Cards Generated dynamically -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 4: DEDICATED STORE MAP & LOCATION SECTION -->
+  <section id="map-location" class="relative w-full py-24 px-6 lg:px-16 bg-ocean border-t border-neon/20">
+    <div class="max-w-[1831px] w-full mx-auto">
+      
+      <div class="mb-12">
+        <span class="font-condiment text-neon text-3xl sm:text-5xl block mb-2">Visit Our Showroom</span>
+        <h2 class="font-anton text-4xl sm:text-6xl text-cream uppercase leading-none">
+          STORE LOCATION & <span class="text-neonGreen">MAP DIRECTION</span>
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        
+        <!-- Left Store Card -->
+        <div class="lg:col-span-5 liquid-glass p-8 sm:p-10 rounded-[32px] border border-white/10 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3 mb-6">
+              <span class="font-anton text-2xl text-neon">KING FISH AQUARIUM</span>
+              <span class="bg-neonGreen/20 border border-neonGreen/40 text-neonGreen text-[10px] font-mono px-3 py-1 rounded-full">OPEN NOW</span>
+            </div>
+
+            <div class="space-y-6 font-mono text-sm text-cream/80">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-2xl liquid-glass border border-neon/30 flex items-center justify-center shrink-0 text-neon">📍</div>
+                <div>
+                  <div class="font-bold text-cream mb-1">SHOP ADDRESS:</div>
+                  <p class="text-xs leading-relaxed">Chauraha, Airforce Rd, opp. Khalsa Inter College, Harjinder Nagar, Lal Bangla, Kanpur, Uttar Pradesh 208007</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-2xl liquid-glass border border-neon/30 flex items-center justify-center shrink-0 text-neon">📞</div>
+                <div>
+                  <div class="font-bold text-cream mb-1">PHONE NUMBER:</div>
+                  <p class="text-xs text-neon font-bold">088535 01676</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-2xl liquid-glass border border-neon/30 flex items-center justify-center shrink-0 text-neon">⏰</div>
+                <div>
+                  <div class="font-bold text-cream mb-1">STORE HOURS:</div>
+                  <p class="text-xs">Monday - Sunday: 10:00 AM – 9:00 PM</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-6 border-t border-white/10 flex flex-wrap gap-4">
+            <a href="tel:+918853501676" class="px-6 py-3.5 bg-neon text-ocean font-anton text-xs uppercase tracking-widest rounded-full hover:bg-neonGreen transition shadow-[0_0_20px_rgba(0,240,255,0.4)]">
+              Call Shop Now
+            </a>
+            <a href="https://maps.google.com/?cid=13160433063141898885" target="_blank" class="liquid-glass border border-white/20 text-cream font-anton text-xs uppercase tracking-widest rounded-full hover:bg-white/10 transition px-6 py-3.5">
+              Open Google Maps
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Embedded Dark Google Map -->
+        <div class="lg:col-span-7 h-[420px] lg:h-auto rounded-[32px] overflow-hidden border border-neon/30 shadow-2xl relative">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3571.868779836372!2d80.3925991!3d26.4160647!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399c411ffa037e9b%3A0xb6a34024dae0fa85!2sKing%20Fish%20Aquarium!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+            width="100%" 
+            height="100%" 
+            style="border:0; filter: invert(90%) hue-rotate(180deg);" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 5: VISIT US TODAY (CONTACT & CTA) -->
+  <section id="contact" class="relative w-full min-h-[80vh] flex items-center justify-center overflow-hidden border-t border-neon/20">
+    <video autoPlay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0 opacity-30">
+      <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260331_055729_72d66327-b59e-4ae9-bb70-de6ccb5ecdb0.mp4" type="video/mp4" />
+    </video>
+    
+    <div class="absolute inset-0 bg-gradient-to-t from-ocean via-ocean/60 to-transparent z-0"></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center py-20">
+      <span class="font-condiment text-neon text-3xl sm:text-5xl block mb-2 -rotate-1 mix-blend-exclusion">
+        King Fish Aquarium
+      </span>
+
+      <h2 class="font-anton text-4xl sm:text-6xl md:text-7xl uppercase text-cream leading-tight mb-8">
+        VISIT US TODAY. <br />
+        TRANSFORM YOUR LIVING SPACE. <br />
+        <span class="text-neonGreen">BRING THE OCEAN HOME.</span>
+      </h2>
+
+      <p class="font-mono text-xs sm:text-sm text-cream/80 max-w-xl mx-auto mb-6">
+        Chauraha, Airforce Rd, opp. Khalsa Inter College, Harjinder Nagar, Lal Bangla, Kanpur, UP 208007
+      </p>
+
+      <div class="flex flex-wrap justify-center gap-4 mb-10">
+        <a href="tel:+918853501676" class="px-8 py-4 bg-neon text-ocean font-anton text-sm uppercase tracking-widest rounded-full hover:bg-neonGreen transition duration-300 shadow-[0_0_35px_rgba(0,240,255,0.6)]">
+          CALL: 088535 01676
+        </a>
+        <a href="https://maps.google.com/?cid=13160433063141898885" target="_blank" class="liquid-glass px-8 py-4 text-cream font-anton text-sm uppercase tracking-widest rounded-full hover:bg-white/10 transition border border-white/20">
+          OPEN MAPS
+        </a>
+      </div>
+
+      <div class="mt-20 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-[11px] text-cream/40 font-mono gap-4">
+        <div>© 2026 KING FISH AQUARIUM (RAJA PET SHOP). ALL RIGHTS RESERVED.</div>
+        <div class="flex gap-6">
+          <a href="#" class="hover:text-cream">PRIVACY POLICY</a>
+          <a href="#" class="hover:text-cream">LAL BANGLA, KANPUR</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ADVANCED BUSINESS CUSTOM TANK SCAPER MODAL -->
+  <div id="scaper-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-ocean/90 backdrop-blur-xl">
+    <div class="liquid-glass max-w-2xl w-full rounded-[32px] p-8 border border-neon/30 max-h-[92vh] overflow-y-auto relative">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="font-anton text-3xl text-neon uppercase tracking-wide">CUSTOM TANK SCAPER</h3>
+        <button onclick="toggleScaperModal()" class="text-cream text-2xl hover:text-neon transition">✕</button>
+      </div>
+
+      <p class="text-xs text-cream/70 mb-6 font-mono leading-relaxed">
+        Configure your dream aquarium setup. Instant estimate calculation including glass tank, biological filtration, and live aquascaping layout for Kanpur delivery.
+      </p>
+
+      <!-- 1. Tank Size -->
+      <div class="mb-6">
+        <label class="block text-xs font-anton uppercase text-cream/90 mb-2.5">1. SELECT TANK VOLUME / SIZE</label>
+        <div id="scaper-sizes" class="grid grid-cols-2 sm:grid-cols-4 gap-2.5"></div>
+      </div>
+
+      <!-- 2. Ecosystem Type -->
+      <div class="mb-6">
+        <label class="block text-xs font-anton uppercase text-cream/90 mb-2.5">2. ECOSYSTEM & SCAPING TYPE</label>
+        <div id="scaper-ecosystems" class="grid grid-cols-1 sm:grid-cols-3 gap-2.5"></div>
+      </div>
+
+      <!-- 3. Fish Breed Selection -->
+      <div class="mb-6">
+        <label class="block text-xs font-anton uppercase text-cream/90 mb-2.5">3. SELECT FISH SPECIMEN PACKAGE</label>
+        <div id="scaper-fishes" class="grid grid-cols-2 sm:grid-cols-4 gap-2.5"></div>
+      </div>
+
+      <!-- 4. Monthly Maintenance -->
+      <div class="mb-8 flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/10">
+        <div>
+          <div class="text-sm font-anton text-cream uppercase">MONTHLY HOME MAINTENANCE PACKAGE</div>
+          <div class="text-xs text-cream/60 mt-1">Includes bi-weekly water testing, glass algae cleaning & fish nutrition in Kanpur.</div>
+        </div>
+        <input id="scaper-maint" type="checkbox" checked onchange="calculateEstimate()" class="w-5 h-5 accent-neon cursor-pointer shrink-0 ml-4">
+      </div>
+
+      <!-- Total & Action Button -->
+      <div class="flex flex-col sm:flex-row items-center justify-between pt-4 border-t border-white/10 gap-4">
+        <div>
+          <div class="text-xs text-cream/60 font-mono uppercase">ESTIMATED TOTAL</div>
+          <div id="estimate-total" class="font-anton text-4xl text-neonGreen">₹19,000</div>
+        </div>
+
+        <button onclick="handleWhatsAppConsultation()" class="w-full sm:w-auto px-8 py-4 bg-neon text-ocean font-anton text-xs uppercase tracking-widest rounded-full hover:bg-neonGreen transition shadow-[0_0_25px_rgba(0,240,255,0.4)] flex items-center justify-center gap-2">
+          BOOK CONSULTATION VIA WHATSAPP
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CART DRAWER -->
+  <div id="cart-drawer" class="hidden fixed inset-0 z-50 flex justify-end bg-black/60 backdrop-blur-md">
+    <div class="w-full max-w-md bg-ocean h-full p-8 border-l border-neon/30 flex flex-col justify-between">
+      <div>
+        <div class="flex justify-between items-center mb-8 border-b border-white/10 pb-4">
+          <h3 class="font-anton text-2xl text-neon uppercase">YOUR AQUATIC CART</h3>
+          <button onclick="toggleCart()" class="text-cream text-xl hover:text-neon">✕</button>
+        </div>
+
+        <div id="cart-items" class="space-y-4 max-h-[60vh] overflow-y-auto pr-2"></div>
+      </div>
+
+      <div id="cart-footer" class="border-t border-white/10 pt-6">
+        <button onclick="checkoutCart()" class="w-full py-4 bg-neonGreen text-ocean font-anton text-sm uppercase tracking-widest rounded-full hover:bg-neon transition">
+          PROCEED TO ORDER
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS ENGINE WITH LOADING ANIMATION SIMULATOR -->
+  <script>
+    let cart = [];
+    let activeFilter = 'All';
+    let isSoundPlaying = false;
+
+    let audioCtx = null;
+    let osc = null;
+    let lfo = null;
+    let masterGain = null;
+
+    let selectedSize = '3 Feet (120L)';
+    let selectedEco = 'Freshwater Planted';
+    let selectedFish = 'Discus & Tetras';
+
+    const items = [
+      {
+        id: 1,
+        title: "FLAME ANGELFISH",
+        category: "Exotic Marine",
+        rarity: "S-TIER RARE",
+        score: "9.8 / 10",
+        price: "₹2,800",
+        desc: "Vibrant coral reef inhabitant with fiery orange-red striping. Quarantined & healthy.",
+        image: "https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: 2,
+        title: "IWAGUMI ZEN REEF",
+        category: "Custom Aquascapes",
+        rarity: "MASTERPIECE",
+        score: "9.9 / 10",
+        price: "₹34,500",
+        desc: "Minimalist Japanese stone arrangement with low-iron ultraclear rimless glass and custom LED matrix.",
+        image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: 3,
+        title: "ROYAL BLUE DISCUS",
+        category: "Freshwater Gems",
+        rarity: "GRADE AAA",
+        score: "9.5 / 10",
+        price: "₹4,200",
+        desc: "The King of Freshwater. Hand-selected wild-cross specimen with iridescent electric blue striations.",
+        image: "https://images.unsplash.com/photo-1535591273668-578e31182c4f?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: 4,
+        title: "PREMIUM FLOWERHORN",
+        category: "Exotic Marine",
+        rarity: "SUPER RED DRAGON",
+        score: "9.7 / 10",
+        price: "₹8,500",
+        desc: "High humped, intense crimson red coloration with pearl streaks across the body.",
+        image: "https://images.unsplash.com/photo-1546026423-cc4642628d2b?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: 5,
+        title: "RIMLESS NANO PLANT TANK",
+        category: "Custom Aquascapes",
+        rarity: "MINIMALIST",
+        score: "9.9 / 10",
+        price: "₹12,000",
+        desc: "Laminar flow circular tank designed with high clarity rimless glass and live aquatic plants.",
+        image: "https://images.unsplash.com/photo-1508873696983-2df515122519?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: 6,
+        title: "DOG & CAT NUTRITION",
+        category: "Pet Supplies",
+        rarity: "PREMIUM FOOD",
+        score: "9.6 / 10",
+        price: "₹850+",
+        desc: "Complete range of premium pet foods for dogs, cats, birds, and aquatic species.",
+        image: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=800&q=80"
+      }
+    ];
+
+    // Page Refresh Loading Animation Simulator
+    function handlePageLoading() {
+      let progress = 0;
+      const bar = document.getElementById('loader-bar');
+      const percentText = document.getElementById('loader-percent');
+      const screen = document.getElementById('loading-screen');
+
+      const interval = setInterval(() => {
+        progress += Math.floor(Math.random() * 15) + 10;
+        if (progress > 100) progress = 100;
+
+        bar.style.width = progress + '%';
+        percentText.innerText = progress + '%';
+
+        if (progress >= 100) {
+          clearInterval(interval);
+          setTimeout(() => {
+            screen.style.opacity = '0';
+            setTimeout(() => {
+              screen.style.display = 'none';
+            }, 700);
+          }, 300);
+        }
+      }, 120);
+    }
+
+    function initBubbles() {
+      const container = document.getElementById('bubble-container');
+      for (let i = 0; i < 18; i++) {
+        const bubble = document.createElement('div');
+        bubble.className = 'bubble';
+        const size = Math.random() * 20 + 8;
+        bubble.style.width = size + 'px';
+        bubble.style.height = size + 'px';
+        bubble.style.left = Math.random() * 100 + '%';
+        bubble.style.animationDuration = (Math.random() * 6 + 6) + 's';
+        bubble.style.animationDelay = (Math.random() * 5) + 's';
+        container.appendChild(bubble);
+      }
+    }
+
+    function renderGrid() {
+      const container = document.getElementById('grid-container');
+      container.innerHTML = '';
+
+      const filtered = activeFilter === 'All' 
+        ? items 
+        : items.filter(i => i.category === activeFilter);
+
+      filtered.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'liquid-glass rounded-[32px] p-5 hover:bg-white/[0.05] transition-all duration-500 group flex flex-col justify-between border border-white/10';
+        card.innerHTML = `
+          <div class="relative w-full aspect-square rounded-[24px] overflow-hidden mb-5 bg-black/40">
+            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700"/>
+            <div class="absolute top-4 left-4 bg-ocean/80 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 text-[10px] font-mono text-neon">${item.rarity}</div>
+            <div class="absolute top-4 right-4 bg-neonGreen/90 text-ocean font-anton px-3.5 py-1 rounded-full text-xs">${item.price}</div>
+          </div>
+          <div class="px-2 mb-4">
+            <h3 class="font-anton text-2xl uppercase tracking-wide text-cream group-hover:text-neon transition">${item.title}</h3>
+            <p class="font-mono text-xs text-cream/70 mt-2 leading-relaxed">${item.desc}</p>
+          </div>
+          <div class="liquid-glass rounded-[20px] px-5 py-4 flex items-center justify-between border border-white/10">
+            <div>
+              <div class="text-[10px] font-mono text-cream/60 tracking-wider">HEALTH & RATING</div>
+              <div class="font-anton text-lg text-neonGreen">${item.score}</div>
+            </div>
+            <button onclick="addToCart(${item.id})" class="w-12 h-12 rounded-full bg-gradient-to-br from-neon to-cyan-600 flex items-center justify-center text-ocean font-anton text-xl hover:scale-110 shadow-lg shadow-neon/30 transition duration-300">+</button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function renderFilters() {
+      const container = document.getElementById('filter-buttons');
+      const cats = ["All", "Exotic Marine", "Freshwater Gems", "Custom Aquascapes", "Pet Supplies"];
+      container.innerHTML = '';
+
+      cats.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.innerText = cat;
+        btn.className = `px-5 py-2.5 rounded-full font-anton text-xs uppercase tracking-wider transition duration-300 ${
+          activeFilter === cat 
+            ? "bg-neon text-ocean shadow-[0_0_20px_rgba(0,240,255,0.5)]" 
+            : "liquid-glass text-cream hover:bg-white/10"
+        }`;
+        btn.onclick = () => {
+          activeFilter = cat;
+          renderFilters();
+          renderGrid();
+        };
+        container.appendChild(btn);
+      });
+    }
+
+    function renderScaperOptions() {
+      const sizes = ["2 Feet (60L)", "3 Feet (120L)", "4 Feet (250L)", "5+ Feet (400L+)"];
+      const sizeContainer = document.getElementById('scaper-sizes');
+      sizeContainer.innerHTML = '';
+      sizes.forEach(sz => {
+        const btn = document.createElement('button');
+        btn.innerText = sz;
+        btn.className = `p-3 rounded-xl border text-xs font-mono transition text-center ${selectedSize === sz ? "bg-neon text-ocean font-bold border-neon shadow-[0_0_15px_rgba(0,240,255,0.4)]" : "bg-white/5 border-white/10 text-cream hover:bg-white/10"}`;
+        btn.onclick = () => { selectedSize = sz; renderScaperOptions(); calculateEstimate(); };
+        sizeContainer.appendChild(btn);
+      });
+
+      const ecos = ["Freshwater Planted", "Monster & Cichlid Setup", "Marine / Saltwater Reef"];
+      const ecoContainer = document.getElementById('scaper-ecosystems');
+      ecoContainer.innerHTML = '';
+      ecos.forEach(e => {
+        const btn = document.createElement('button');
+        btn.innerText = e;
+        btn.className = `p-3 rounded-xl border text-xs font-mono transition text-center ${selectedEco === e ? "bg-neonGreen text-ocean font-bold border-neonGreen shadow-[0_0_15px_rgba(111,255,0,0.4)]" : "bg-white/5 border-white/10 text-cream hover:bg-white/10"}`;
+        btn.onclick = () => { selectedEco = e; renderScaperOptions(); calculateEstimate(); };
+        ecoContainer.appendChild(btn);
+      });
+
+      const fishes = ["Discus & Tetras", "Flowerhorn / Cichlids", "Exotic Marine Reef Fish", "Goldfish & Guppies"];
+      const fishContainer = document.getElementById('scaper-fishes');
+      fishContainer.innerHTML = '';
+      fishes.forEach(f => {
+        const btn = document.createElement('button');
+        btn.innerText = f;
+        btn.className = `p-3 rounded-xl border text-xs font-mono transition text-center ${selectedFish === f ? "bg-neon text-ocean font-bold border-neon shadow-[0_0_15px_rgba(0,240,255,0.4)]" : "bg-white/5 border-white/10 text-cream hover:bg-white/10"}`;
+        btn.onclick = () => { selectedFish = f; renderScaperOptions(); calculateEstimate(); };
+        fishContainer.appendChild(btn);
+      });
+    }
+
+    function calculateEstimate() {
+      let base = 8500;
+      if (selectedSize.includes("2 Feet")) base = 6500;
+      if (selectedSize.includes("3 Feet")) base = 12500;
+      if (selectedSize.includes("4 Feet")) base = 22000;
+      if (selectedSize.includes("5+ Feet")) base = 42000;
+
+      if (selectedEco === "Monster & Cichlid Setup") base += 3500;
+      if (selectedEco === "Marine / Saltwater Reef") base += 8500;
+
+      if (selectedFish === "Flowerhorn / Cichlids") base += 2500;
+      if (selectedFish === "Exotic Marine Reef Fish") base += 4500;
+
+      const maintChecked = document.getElementById('scaper-maint').checked;
+      if (maintChecked) base += 1500;
+
+      document.getElementById('estimate-total').innerText = '₹' + base.toLocaleString('en-IN');
+      return base;
+    }
+
+    function handleWhatsAppConsultation() {
+      const total = calculateEstimate();
+      const maintChecked = document.getElementById('scaper-maint').checked;
+      const text = `Hello King Fish Aquarium! 👋%0A%0AI would like a Custom Tank Consultation for:%0A• Size: ${selectedSize}%0A• Ecosystem: ${selectedEco}%0A• Fish Preference: ${selectedFish}%0A• Monthly Maintenance: ${maintChecked ? 'Yes' : 'No'}%0A• Estimated Total: ₹${total.toLocaleString('en-IN')}%0A%0APlease contact me with availability in Kanpur!`;
+      window.open(`https://wa.me/918853501676?text=${text}`, '_blank');
+    }
+
+    function toggleScaperModal() {
+      const modal = document.getElementById('scaper-modal');
+      modal.classList.toggle('hidden');
+      if (!modal.classList.contains('hidden')) {
+        renderScaperOptions();
+        calculateEstimate();
+      }
+    }
+
+    function addToCart(id) {
+      const item = items.find(i => i.id === id);
+      cart.push({ ...item, cartId: Date.now() });
+      updateCartUI();
+      toggleCart();
+    }
+
+    function removeFromCart(cartId) {
+      cart = cart.filter(c => c.cartId !== cartId);
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const countEl = document.getElementById('cart-count');
+      const itemsEl = document.getElementById('cart-items');
+
+      if (cart.length > 0) {
+        countEl.innerText = cart.length;
+        countEl.classList.remove('hidden');
+        countEl.classList.add('flex');
+      } else {
+        countEl.classList.add('hidden');
+        countEl.classList.remove('flex');
+      }
+
+      if (cart.length === 0) {
+        itemsEl.innerHTML = `<div class="text-center py-16 text-cream/50 font-mono text-sm">Your tank is empty. Add rare fish or aquascapes to get started.</div>`;
+      } else {
+        itemsEl.innerHTML = '';
+        cart.forEach(c => {
+          const div = document.createElement('div');
+          div.className = 'liquid-glass p-4 rounded-xl flex items-center justify-between border border-white/10';
+          div.innerHTML = `
+            <div>
+              <div class="font-anton text-cream text-lg">${c.title}</div>
+              <div class="text-xs text-neon font-mono">${c.price}</div>
+            </div>
+            <button onclick="removeFromCart(${c.cartId})" class="text-xs text-red-400 hover:text-red-300">Remove</button>
+          `;
+          itemsEl.appendChild(div);
+        });
+      }
+    }
+
+    function toggleCart() {
+      document.getElementById('cart-drawer').classList.toggle('hidden');
+    }
+
+    function checkoutCart() {
+      alert("Inquiry Received! King Fish Aquarium team will call you shortly on 088535 01676.");
+      cart = [];
+      updateCartUI();
+      toggleCart();
+    }
+
+    function toggleOceanSound() {
+      const dot = document.getElementById('sound-dot');
+      const text = document.getElementById('sound-text');
+
+      if (!isSoundPlaying) {
+        try {
+          const AudioCtx = window.AudioContext || window.webkitAudioContext;
+          audioCtx = new AudioCtx();
+
+          if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+          }
+
+          osc = audioCtx.createOscillator();
+          masterGain = audioCtx.createGain();
+
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(65, audioCtx.currentTime);
+          
+          lfo = audioCtx.createOscillator();
+          const lfoGain = audioCtx.createGain();
+          lfo.frequency.setValueAtTime(0.2, audioCtx.currentTime);
+          lfoGain.gain.setValueAtTime(15, audioCtx.currentTime);
+          
+          lfo.connect(osc.frequency);
+          
+          masterGain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+          osc.connect(masterGain);
+          masterGain.connect(audioCtx.destination);
+
+          osc.start();
+          lfo.start();
+
+          isSoundPlaying = true;
+          dot.className = "w-3 h-3 rounded-full bg-neonGreen animate-ping shadow-[0_0_12px_#6FFF00]";
+          text.innerText = "OCEAN AMBIENCE: PLAYING 🔊";
+        } catch (e) {
+          console.log("Audio Error:", e);
+        }
+      } else {
+        if (audioCtx) {
+          audioCtx.close();
+        }
+        isSoundPlaying = false;
+        dot.className = "w-3 h-3 rounded-full bg-gray-400";
+        text.innerText = "ENABLE DEEP SOUND 🌊";
+      }
+    }
+
+    window.onload = () => {
+      handlePageLoading();
+      initBubbles();
+      renderFilters();
+      renderGrid();
+      updateCartUI();
+    };
+  </script>
+</body>
+</html>
