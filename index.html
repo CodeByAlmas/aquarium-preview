@@ -3,7 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aquascape | Nature Aquariums & Living Aquatic Art</title>
+  <title>Aquascape Kanpur | Custom Nature Aquariums & Living Aquatic Art</title>
+  <meta name="description" content="Kanpur's premier Nature Aquarium studio. Handcrafted rimless aquascapes, Iwagumi layouts, exotic freshwater fauna, and precision biological filtration." />
+  <meta name="keywords" content="Aquascape Kanpur, Custom Aquariums, Iwagumi, Planted Tank, Discus Fish, Kanpur Fish Store" />
+  
+  <!-- OpenGraph Meta Tags for Social & WhatsApp Sharing -->
+  <meta property="og:title" content="Aquascape Kanpur | Nature Aquariums & Aquatic Art" />
+  <meta property="og:description" content="Custom rimless aquascapes, Iwagumi setups, rare exotic fish & precision filtration in Kanpur." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80" />
+  <meta property="og:type" content="website" />
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -129,6 +137,34 @@
     .loader-ring {
       animation: loaderSpin 2s linear infinite;
     }
+
+    /* Comparison Slider styles */
+    .slider-handle {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: #00F0FF;
+      box-shadow: 0 0 15px #00F0FF;
+      cursor: ew-resize;
+    }
+    .slider-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #010828;
+      border: 2px solid #00F0FF;
+      box-shadow: 0 0 15px rgba(0,240,255,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #00F0FF;
+      font-size: 14px;
+    }
   </style>
 </head>
 <body class="bg-ocean text-cream font-mono antialiased selection:bg-neon selection:text-ocean overflow-x-hidden pt-20 sm:pt-24">
@@ -193,7 +229,7 @@
         </button>
 
         <!-- Hamburger Button -->
-        <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="lg:hidden liquid-glass w-11 h-11 rounded-2xl flex flex-col items-center justify-center gap-1.5 border border-neon/40 text-cream focus:outline-none shadow-xl">
+        <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="lg:hidden liquid-glass w-11 h-11 rounded-2xl flex flex-col items-center justify-center gap-1.5 border border-neon/40 text-cream focus:outline-none shadow-xl" aria-label="Toggle Menu">
           <span class="w-5 h-0.5 bg-neon"></span>
           <span class="w-5 h-0.5 bg-neonGreen"></span>
           <span class="w-5 h-0.5 bg-cream"></span>
@@ -222,7 +258,7 @@
       <a href="#reviews" onclick="closeMobileMenu()" class="py-2.5 text-cream hover:text-neon border-b border-white/5">Customer Reviews</a>
       <a href="#map-location" onclick="closeMobileMenu()" class="py-2.5 text-cream hover:text-neon border-b border-white/5">Store Location & Directions</a>
       <button onclick="closeMobileMenu(); toggleScaperModal();" class="py-3.5 text-neonGreen font-bold bg-neonGreen/10 border border-neonGreen/30 rounded-2xl mt-2">Tank Scaper Estimate</button>
-      <button onclick="closeMobileMenu(); openAdminModal();" class="py-3.5 text-ocean bg-neon rounded-2xl font-bold shadow-[0_0_20px_rgba(0,240,255,0.4)]">Admin Login (PIN: 1234)</button>
+      <button onclick="closeMobileMenu(); openAdminModal();" class="py-3.5 text-ocean bg-neon rounded-2xl font-bold shadow-[0_0_20px_rgba(0,240,255,0.4)]">Admin Portal</button>
     </div>
 
     <div class="text-center text-[10px] font-mono text-cream/40 pt-4 border-t border-white/10">
@@ -231,12 +267,12 @@
   </div>
 
   <!-- Floating WhatsApp Quick Lead Button -->
-  <a id="floating-whatsapp" href="https://wa.me/919999999999?text=Hello%20Aquascape!%20I%20want%20to%20inquire%20about%20custom%20aquariums%20and%20fish." target="_blank" class="fixed bottom-24 right-6 z-40 bg-[#25D366] text-white rounded-full p-4 hover:scale-110 transition duration-300 flex items-center justify-center shadow-[0_0_25px_rgba(37,211,102,0.6)] group">
+  <a id="floating-whatsapp" href="https://wa.me/919999999999?text=Hello%20Aquascape!%20I%20want%20to%20inquire%20about%20custom%20aquariums%20and%20fish." target="_blank" class="fixed bottom-24 right-6 z-40 bg-[#25D366] text-white rounded-full p-4 hover:scale-110 transition duration-300 flex items-center justify-center shadow-[0_0_25px_rgba(37,211,102,0.6)] group" aria-label="WhatsApp Us">
     <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
   </a>
 
   <!-- Cart Button -->
-  <button onclick="toggleCart()" class="fixed bottom-6 right-6 z-40 liquid-glass rounded-full p-4 hover:scale-110 transition duration-300 flex items-center justify-center border border-neon/40 shadow-2xl group">
+  <button onclick="toggleCart()" class="fixed bottom-6 right-6 z-40 liquid-glass rounded-full p-4 hover:scale-110 transition duration-300 flex items-center justify-center border border-neon/40 shadow-2xl group" aria-label="Open Cart">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-neon group-hover:text-neonGreen transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 11h14l1 12H4L5 11z" />
     </svg>
@@ -251,7 +287,7 @@
 
   <!-- SECTION 1: HERO SECTION -->
   <section id="hero" class="relative w-full min-h-[90vh] flex flex-col justify-between rounded-b-[36px] overflow-hidden border-b border-neon/20 shadow-2xl">
-    <video autoPlay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0 opacity-40 mix-blend-screen scale-105 transition-transform duration-1000">
+    <video autoPlay loop muted playsinline poster="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80" class="absolute inset-0 w-full h-full object-cover z-0 opacity-40 mix-blend-screen scale-105 transition-transform duration-1000">
       <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260331_045634_e1c98c76-1265-4f5c-882a-4276f2080894.mp4" type="video/mp4" />
     </video>
     
@@ -282,16 +318,19 @@
             <button onclick="toggleScaperModal()" class="liquid-glass px-7 py-3.5 sm:px-8 sm:py-4 text-cream font-anton text-xs sm:text-sm uppercase tracking-widest rounded-full hover:bg-white/10 transition border border-white/20">
               Design Your Tank
             </button>
+            <a id="hero-quick-wa" href="https://wa.me/919999999999?text=Hello%20Aquascape!%20I%20want%20to%20inquire%20about%20a%20new%20tank." target="_blank" class="liquid-glass px-5 py-3.5 sm:px-6 sm:py-4 text-neonGreen font-anton text-xs uppercase tracking-widest rounded-full hover:bg-neonGreen/20 transition border border-neonGreen/40 flex items-center gap-2">
+              <span>💬 Free Consultation</span>
+            </a>
           </div>
         </div>
 
         <div class="hidden lg:flex flex-col gap-4 absolute top-4 right-0 z-30">
           <div class="relative group">
-            <a id="display-call-btn" href="#map-location" class="w-14 h-14 liquid-glass rounded-2xl flex items-center justify-center text-cream hover:text-neon hover:bg-white/10 transition duration-300 border border-white/10 shadow-lg">
+            <a id="display-call-btn" href="tel:+919999999999" class="w-14 h-14 liquid-glass rounded-2xl flex items-center justify-center text-cream hover:text-neon hover:bg-white/10 transition duration-300 border border-white/10 shadow-lg">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
             </a>
             <span class="absolute right-16 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-ocean/90 border border-white/20 text-cream text-[11px] font-mono px-3 py-1.5 rounded-lg whitespace-nowrap pointer-events-none shadow-xl">
-              Contact Studio
+              Direct Phone Call
             </span>
           </div>
 
@@ -322,7 +361,7 @@
 
   <!-- SECTION 2: ABOUT SHOP -->
   <section id="about" class="relative w-full min-h-screen flex flex-col justify-center py-20 px-6 lg:px-16 overflow-hidden">
-    <video autoPlay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0 opacity-20">
+    <video autoPlay loop muted playsinline poster="https://images.unsplash.com/photo-1508873696983-2df515122519?auto=format&fit=crop&w=1200&q=80" class="absolute inset-0 w-full h-full object-cover z-0 opacity-20">
       <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260331_151551_992053d1-3d3e-4b8c-abac-45f22158f411.mp4" type="video/mp4" />
     </video>
     <div class="absolute inset-0 bg-ocean/90 z-0"></div>
@@ -440,32 +479,39 @@
     </div>
   </section>
 
-  <!-- SECTION 5: BEFORE & AFTER TRANSFORMATION SHOWCASE -->
+  <!-- SECTION 5: INTERACTIVE BEFORE & AFTER TRANSFORMATION SHOWCASE -->
   <section id="transformation" class="relative w-full py-20 px-6 lg:px-16 bg-ocean border-t border-neon/20">
     <div class="max-w-[1831px] mx-auto">
       <div class="mb-12 text-center max-w-2xl mx-auto">
         <span class="font-condiment text-neon text-3xl sm:text-5xl block mb-2">Living Masterpiece</span>
         <h2 class="font-anton text-4xl sm:text-5xl uppercase text-cream">AQUASCAPE TRANSFORMATION</h2>
-        <p class="text-xs font-mono text-cream/70 mt-3">From an empty glass box to a thriving natural biological underwater ecosystem.</p>
+        <p class="text-xs font-mono text-cream/70 mt-3">Drag the interactive slider below to see the transformation from raw stones to a thriving underwater ecosystem.</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-        <div class="liquid-glass rounded-[32px] p-6 border border-white/10">
-          <div class="relative aspect-video rounded-2xl overflow-hidden mb-4 bg-black">
-            <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80" alt="Raw Hardscape" class="w-full h-full object-cover">
-            <span class="absolute top-3 left-3 bg-ocean/90 border border-white/20 text-[10px] font-mono text-cream px-3 py-1 rounded-full">STAGE 1: HARDSCAPE & ROCKWORK</span>
+      <!-- Interactive Comparison Slider Container -->
+      <div class="max-w-4xl mx-auto liquid-glass rounded-[32px] p-6 border border-neon/30 shadow-[0_0_40px_rgba(0,240,255,0.15)] mb-8">
+        <div id="comparison-slider" class="relative w-full aspect-[16/9] rounded-2xl overflow-hidden select-none cursor-ew-resize bg-black">
+          <!-- After (Planted) Image (Background) -->
+          <img src="https://images.unsplash.com/photo-1508873696983-2df515122519?auto=format&fit=crop&w=1200&q=80" alt="Full Carpet Result" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
+          <span class="absolute top-4 right-4 bg-neonGreen text-ocean text-[10px] font-anton px-3.5 py-1.5 rounded-full z-10 shadow-lg">AFTER: 90 DAYS FULL CARPET</span>
+          
+          <!-- Before (Hardscape) Image (Clipped Overlay) -->
+          <div id="slider-before-wrap" class="absolute inset-0 w-1/2 h-full overflow-hidden pointer-events-none border-r border-neon">
+            <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80" alt="Raw Hardscape" class="absolute top-0 left-0 max-w-none h-full w-[1000px] md:w-[1200px] object-cover" id="slider-before-img">
+            <span class="absolute top-4 left-4 bg-ocean/90 border border-white/20 text-[10px] font-mono text-cream px-3 py-1.5 rounded-full z-10 shadow-lg">BEFORE: RAW HARDSCAPE</span>
           </div>
-          <h3 class="font-anton text-xl text-cream">PRECISION IWAGUMI SETUP</h3>
-          <p class="text-xs font-mono text-cream/60 mt-1">Seiryu stones arrangement with bio-active substrate.</p>
+
+          <!-- Draggable Divider Line & Knob -->
+          <div id="slider-divider" class="slider-handle left-1/2">
+            <div class="slider-button">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 9l4-4 4 4m0 6l-4 4-4-4"/></svg>
+            </div>
+          </div>
         </div>
 
-        <div class="liquid-glass rounded-[32px] p-6 border border-neon/30 shadow-[0_0_30px_rgba(0,240,255,0.15)]">
-          <div class="relative aspect-video rounded-2xl overflow-hidden mb-4 bg-black">
-            <img src="https://images.unsplash.com/photo-1508873696983-2df515122519?auto=format&fit=crop&w=800&q=80" alt="Planted Result" class="w-full h-full object-cover">
-            <span class="absolute top-3 left-3 bg-neonGreen text-ocean text-[10px] font-anton px-3 py-1 rounded-full">STAGE 2: 90 DAYS FULL CARPET</span>
-          </div>
-          <h3 class="font-anton text-xl text-neonGreen">FULL THRIVING ECOSYSTEM</h3>
-          <p class="text-xs font-mono text-cream/60 mt-1">High-pressure CO2 injection with Monte Carlo carpet plants.</p>
+        <div class="flex flex-col sm:flex-row items-center justify-between mt-4 px-2 text-xs font-mono text-cream/70 gap-2">
+          <span>👈 Drag left/right to compare</span>
+          <span class="text-neon">Precision Iwagumi Arrangement → Thriving Ecosystem</span>
         </div>
       </div>
     </div>
@@ -541,7 +587,9 @@
                 <div class="w-10 h-10 rounded-2xl liquid-glass border border-neon/30 flex items-center justify-center shrink-0 text-neon">📞</div>
                 <div>
                   <div class="font-bold text-cream mb-1">PHONE NUMBER:</div>
-                  <p id="display-phone" class="text-xs text-neon font-bold">Contact via Studio</p>
+                  <a id="display-phone-link" href="tel:+919999999999" class="text-xs text-neon font-bold hover:underline block">
+                    <span id="display-phone">+91 99999 99999</span>
+                  </a>
                 </div>
               </div>
 
@@ -558,6 +606,9 @@
           <div class="mt-8 pt-6 border-t border-white/10 flex flex-wrap gap-4">
             <a id="display-gmaps-link" href="https://www.google.com/maps/place/Aquascape/@26.4209548,80.3582716,15z" target="_blank" class="px-6 py-3.5 bg-neon text-ocean font-anton text-xs uppercase tracking-widest rounded-full hover:bg-neonGreen transition shadow-[0_0_20px_rgba(0,240,255,0.4)]">
               Open Google Maps
+            </a>
+            <a id="display-wa-direct" href="https://wa.me/919999999999" target="_blank" class="px-6 py-3.5 liquid-glass text-neonGreen font-anton text-xs uppercase tracking-widest rounded-full hover:bg-neonGreen/10 transition border border-neonGreen/30">
+              Chat on WhatsApp
             </a>
           </div>
         </div>
@@ -580,7 +631,7 @@
 
   <!-- SECTION 8: VISIT US TODAY (CONTACT & CTA) -->
   <section id="contact" class="relative w-full min-h-[80vh] flex items-center justify-center overflow-hidden border-t border-neon/20">
-    <video autoPlay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0 opacity-30">
+    <video autoPlay loop muted playsinline poster="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80" class="absolute inset-0 w-full h-full object-cover z-0 opacity-30">
       <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260331_055729_72d66327-b59e-4ae9-bb70-de6ccb5ecdb0.mp4" type="video/mp4" />
     </video>
     
@@ -625,7 +676,7 @@
       <div id="admin-auth" class="py-12 text-center max-w-md mx-auto">
         <div class="w-16 h-16 rounded-full bg-neon/10 border border-neon/40 flex items-center justify-center mx-auto mb-4 text-2xl">🔐</div>
         <h3 class="font-anton text-3xl text-neon uppercase mb-2">STORE ADMIN LOGIN</h3>
-        <p class="text-xs font-mono text-cream/60 mb-6">Enter your 4-digit PIN to manage live store stocks & business details. (Default: 1234)</p>
+        <p class="text-xs font-mono text-cream/60 mb-6">Enter authorized 4-digit PIN to manage live store stocks & business details.</p>
         
         <input id="admin-pin-input" type="password" maxlength="6" class="w-48 text-center text-2xl tracking-[1em] font-anton bg-white/5 border border-white/20 rounded-xl p-3 text-neon outline-none focus:border-neon mb-6 mx-auto block" placeholder="••••">
         
@@ -802,8 +853,8 @@
       </div>
 
       <div id="cart-footer" class="border-t border-white/10 pt-6">
-        <button onclick="checkoutCart()" class="w-full py-4 bg-neonGreen text-ocean font-anton text-sm uppercase tracking-widest rounded-full hover:bg-neon transition">
-          PROCEED TO ORDER
+        <button onclick="checkoutCart()" class="w-full py-4 bg-neonGreen text-ocean font-anton text-sm uppercase tracking-widest rounded-full hover:bg-neon transition shadow-[0_0_20px_rgba(111,255,0,0.4)]">
+          ORDER VIA WHATSAPP
         </button>
       </div>
     </div>
@@ -876,7 +927,7 @@
 
     const DEFAULT_STORE = {
       name: "Aquascape",
-      phone: "Contact via Studio",
+      phone: "+91 98390 12345",
       whatsapp: "919999999999",
       address: "Aquascape, Kanpur, Uttar Pradesh (Coordinates: 26.42095, 80.35827)",
       hours: "Monday - Sunday: 10:00 AM – 9:00 PM",
@@ -915,7 +966,7 @@
       const screen = document.getElementById('loading-screen');
 
       const interval = setInterval(() => {
-        progress += Math.floor(Math.random() * 15) + 10;
+        progress += Math.floor(Math.random() * 20) + 15;
         if (progress > 100) progress = 100;
 
         bar.style.width = progress + '%';
@@ -927,10 +978,10 @@
             screen.style.opacity = '0';
             setTimeout(() => {
               screen.style.display = 'none';
-            }, 700);
-          }, 300);
+            }, 500);
+          }, 200);
         }
-      }, 120);
+      }, 70);
     }
 
     function initBubbles() {
@@ -964,7 +1015,7 @@
         card.className = 'liquid-glass rounded-[32px] p-5 hover:bg-white/[0.05] transition-all duration-500 group flex flex-col justify-between border border-white/10';
         card.innerHTML = `
           <div class="relative w-full aspect-square rounded-[24px] overflow-hidden mb-5 bg-black/40">
-            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700"/>
+            <img src="${item.image}" alt="${item.title}" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition duration-700"/>
             <div class="absolute top-4 left-4 bg-ocean/80 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 text-[10px] font-mono text-neon">${item.rarity}</div>
             <div class="absolute top-4 right-4 bg-neonGreen/90 text-ocean font-anton px-3.5 py-1 rounded-full text-xs">${item.price}</div>
           </div>
@@ -1143,7 +1194,13 @@
     }
 
     function checkoutCart() {
-      alert(`Inquiry Received! ${storeInfo.name} team will contact you shortly.`);
+      if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+      }
+      let itemsSummary = cart.map((c, idx) => `${idx + 1}. ${c.title} (${c.price})`).join('%0A');
+      const text = `Hello ${storeInfo.name}! 👋%0A%0AI want to order the following items:%0A${itemsSummary}%0A%0APlease confirm availability and delivery in Kanpur!`;
+      window.open(`https://wa.me/${storeInfo.whatsapp}?text=${text}`, '_blank');
       cart = [];
       updateCartUI();
       toggleCart();
@@ -1197,6 +1254,49 @@
       }
     }
 
+    // Interactive Image Comparison Slider Setup
+    function initComparisonSlider() {
+      const container = document.getElementById('comparison-slider');
+      const beforeWrap = document.getElementById('slider-before-wrap');
+      const divider = document.getElementById('slider-divider');
+      let isDragging = false;
+
+      function updateSliderPosition(xPos) {
+        const rect = container.getBoundingClientRect();
+        let x = xPos - rect.left;
+        if (x < 0) x = 0;
+        if (x > rect.width) x = rect.width;
+        const percent = (x / rect.width) * 100;
+        beforeWrap.style.width = percent + '%';
+        divider.style.left = percent + '%';
+      }
+
+      container.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        updateSliderPosition(e.clientX);
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        updateSliderPosition(e.clientX);
+      });
+
+      window.addEventListener('mouseup', () => { isDragging = false; });
+
+      // Touch events for mobile
+      container.addEventListener('touchstart', (e) => {
+        isDragging = true;
+        updateSliderPosition(e.touches[0].clientX);
+      });
+
+      window.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        updateSliderPosition(e.touches[0].clientX);
+      });
+
+      window.addEventListener('touchend', () => { isDragging = false; });
+    }
+
     // ================= ADMIN PANEL SCRIPTS =================
     function openAdminModal() {
       document.getElementById('admin-modal').classList.remove('hidden');
@@ -1216,7 +1316,7 @@
         document.getElementById('admin-dashboard').classList.remove('hidden');
         populateAdminData();
       } else {
-        alert("Incorrect PIN! Please enter 1234.");
+        alert("Incorrect PIN! Please enter valid authorization code.");
       }
     }
 
@@ -1327,12 +1427,26 @@
     function applyStoreDataToUI() {
       document.getElementById('display-address').innerText = storeInfo.address;
       document.getElementById('display-phone').innerText = storeInfo.phone;
+      if (document.getElementById('display-phone-link')) {
+        document.getElementById('display-phone-link').href = `tel:${storeInfo.phone.replace(/[^0-9+]/g, '')}`;
+      }
+      if (document.getElementById('display-call-btn')) {
+        document.getElementById('display-call-btn').href = `tel:${storeInfo.phone.replace(/[^0-9+]/g, '')}`;
+      }
       document.getElementById('display-hours').innerText = storeInfo.hours;
       document.getElementById('display-footer-address').innerText = storeInfo.address;
 
       document.getElementById('display-gmaps-link').href = storeInfo.gmaps;
       document.getElementById('display-footer-map').href = storeInfo.gmaps;
-      document.getElementById('floating-whatsapp').href = `https://wa.me/${storeInfo.whatsapp}?text=Hello%20${encodeURIComponent(storeInfo.name)}!%20I%20want%20to%20inquire%20about%20custom%20aquariums%20and%20fish.`;
+      
+      const waUrl = `https://wa.me/${storeInfo.whatsapp}?text=Hello%20${encodeURIComponent(storeInfo.name)}!%20I%20want%20to%20inquire%20about%20custom%20aquariums%20and%20fish.`;
+      document.getElementById('floating-whatsapp').href = waUrl;
+      if (document.getElementById('hero-quick-wa')) {
+        document.getElementById('hero-quick-wa').href = waUrl;
+      }
+      if (document.getElementById('display-wa-direct')) {
+        document.getElementById('display-wa-direct').href = waUrl;
+      }
     }
 
     function resetToDefaults() {
@@ -1355,6 +1469,7 @@
       runCalculator();
       updateCartUI();
       applyStoreDataToUI();
+      initComparisonSlider();
     };
   </script>
 </body>
