@@ -495,9 +495,9 @@
           <img src="assets/images/planted-after.png" alt="Full Carpet Result" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
           <span class="absolute top-4 right-4 bg-neonGreen text-ocean text-[10px] font-anton px-3.5 py-1.5 rounded-full z-10 shadow-lg">AFTER: 90 DAYS FULL CARPET</span>
           
-          <!-- Before (Hardscape) Image (Clipped Overlay) -->
+          <!-- Before (Hardscape) Image (Clipped Overlay with exact same width/height as parent) -->
           <div id="slider-before-wrap" class="absolute inset-0 w-1/2 h-full overflow-hidden pointer-events-none border-r border-neon">
-            <img src="assets/images/hardscape-before.png" alt="Raw Hardscape" class="absolute top-0 left-0 max-w-none h-full w-[1000px] md:w-[1200px] object-cover" id="slider-before-img">
+            <img src="assets/images/hardscape-before.png" alt="Raw Hardscape" class="absolute inset-0 max-w-none h-full object-cover pointer-events-none" id="slider-before-img">
             <span class="absolute top-4 left-4 bg-ocean/90 border border-white/20 text-[10px] font-mono text-cream px-3 py-1.5 rounded-full z-10 shadow-lg">BEFORE: RAW HARDSCAPE</span>
           </div>
 
@@ -1258,8 +1258,15 @@
     function initComparisonSlider() {
       const container = document.getElementById('comparison-slider');
       const beforeWrap = document.getElementById('slider-before-wrap');
+      const beforeImg = document.getElementById('slider-before-img');
       const divider = document.getElementById('slider-divider');
       let isDragging = false;
+
+      function syncImgWidth() {
+        if (container && beforeImg) {
+          beforeImg.style.width = container.offsetWidth + 'px';
+        }
+      }
 
       function updateSliderPosition(xPos) {
         const rect = container.getBoundingClientRect();
@@ -1270,6 +1277,9 @@
         beforeWrap.style.width = percent + '%';
         divider.style.left = percent + '%';
       }
+
+      syncImgWidth();
+      window.addEventListener('resize', syncImgWidth);
 
       container.addEventListener('mousedown', (e) => {
         isDragging = true;
